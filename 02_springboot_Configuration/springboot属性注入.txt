@@ -1,0 +1,57 @@
+----------------------回顾--------------------
+一、springboot介绍
+	springboot(spring+springmvc)：不是对spring功能的增强，而是提供了一种快速开发spring应用的方式
+	特点：
+		简化xml
+		简化maven
+		内嵌tomcat
+
+二、springboot项目构建
+	1、创建maven工程，继承springboot父工程
+	2、设计jdk版本号
+	3、添加启动器
+	4、创建启动类(controller、service、mapper上级包)，并添加@SpringBootApplicaiton
+
+三、springboot全局配置文件
+	1、properties方式
+		server.port=8080
+
+	2、yml方式
+		server:
+			port: 8080
+		语法：
+			1、树状结构，空格缩进
+			2、"."----->":"
+			3、"="----->": "
+
+四、springboot项目的两种发布方式
+	jar方式
+	war方式
+----------------------------------02、springboot属性注入------------------------------------
+一、 @Value方式注入
+	@Component
+	public class Dog{
+	        @Value("${dog.nam}")
+		    private String nam;
+	        @Value("${dog.age}")
+	        private Integer age;
+	}
+	问题：属性多，则 @Value多
+
+二、 @ConfigurationProperties注入
+	@Component
+	@ConfigurationProperties("dog")//读取dog开头的配置，通过set方法注入
+	public class Dog{
+		//属性
+		//set get
+	}
+
+三、SpringBoot默认注入
+    @Configuration
+    public class BeanConfig{
+        @Bean
+        @ConfigurationProperties("pig")
+        public Pig pig(){
+            return new Pig();
+        }
+    }

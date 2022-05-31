@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <span th:if="${sex} == '男'">
+        他是男的
+    </span>
+    <span th th:if="${sex} == '女'">
+        她是女的
+    </span>
+    <br>
+   李逍遥是 <input th:value="${sex} == '男' ? '男':'女'">的
+
+    </input>
+
+</body>
+</html>

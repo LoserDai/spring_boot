@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        现在是: <span th:text="${#dates.format(birth,'yyyy年MM月dd日HH点mm分ss秒')}"></span>
+</body>
+</html>

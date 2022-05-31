@@ -1,0 +1,117 @@
+---------------------------RabbitMQ-------------------------
+一、rabbitmq介绍
+ 1、什么是mq?
+	mq(message queue)：消息队列，存储消息的容器
+ 2、什么是rabbitmq？
+	 rabbitmq是erlang语言编写实现AMQP协议的消息中间件
+ 3、为什么要使用rabbitmq？
+	解耦：a服务调用b、c服务，若再添加d服务时无须修改a服务的源代码
+	异步：a服务把消息发送到mq，b、c服务接收消息以异步的方式运行
+	削峰：按并发量慢慢拉取或只处理前100条
+二、rabbitmq安装
+ 1、安装erlang
+	rpm -ivh esl-erlang-17.3-1.x86_64.rpm --force --nodeps
+	rpm -ivh esl-erlang_17.3-1~centos~6_amd64.rpm --force --nodeps
+	rpm -ivh esl-erlang-compat-R14B-1.el6.noarch.rpm --force --nodeps
+ 2、安装rabbitmq
+	 rpm -ivh rabbitmq-server-3.4.1-1.noarch.rpm
+ 3、启动和关闭
+	 service rabbitmq-server start
+	 service rabbitmq-server stop
+	 service rabbitmq-server restart
+	 service rabbitmq-server status
+ 4、安装后台管理界面
+	 rabbitmq-plugins enable rabbitmq_management
+	 service rabbitmq-server restart
+ 5、创建账号
+	 rabbitmqctl  add_user admin 1111
+	 rabbitmqctl  set_user_tags admin  administrator
+	 rabbitmqctl set_permissions -p "/" admin ".*" ".*" ".*"
+	 rabbitmqctl list_users
+三、五种消息模型
+ 1、simple-基本消息模型
+        producer---------->queue---------->consumer
+
+            手动确认：
+                channel.basicConsumer(quque_name,false,consumer);
+
+                try{
+                    .....
+                    channel.basicAck(deliveryTag,false);
+                }catch(){
+                }
+
+ 2、work-工作消息模型
+        producer---------->queue---------->多consumer
+            能者多劳：
+                channel.basicQOS(1);
+            如何避免消息堆积？多consumer
+
+ 3、fanout-广播消息模型
+        producer------>exchage---->多queue---------->多consumer
+
+            exchange：只负责分发消息
+            注意：1、必须先启动Sender  2、若没有queue绑定，则exchage会把消息丢弃
+
+ 4、direct-定向消息模型
+        producer---(routingkey)--->exchage----(routingkey)-->多queue---------->多consumer
+
+            routing key：灵活分发消息
+
+ 5、topic-话题消息模型
+        producer---(routingkey)--->exchage----(*.routingkey.#)-->多queue---------->多consumer
+
+            *：匹配一个字符
+            #：匹配多个字符
+
+四、持久化
+    1、交换机
+        channel.exchangeDeclare(, ,true);
+    2、队列
+        channel.queueDeclare(,true,,,);
+    3、消息
+         channel.basicPublish(, , MessageProperties.PERSISTENT_TEXT_PLAIN, );
+
+    注意：如何保证消息成功消费？
+        1、rabbitmq会宕机？
+            持久化
+        2、consumer业务会处理失败
+            手动确认：只有业务处理成功才会删除queue中的消息
+
+五、springboot整合rabbitmq
+  1、消费者
+     @Component
+     public class Receiver{
+         @RabbitMQListener(bindings={@QueueBind(
+                    value = @Queue(value="springboot_queue"),
+                    exchange = @Exchange(value = "springboot_exchange", type = ExchangeTypes.TOPIC),
+                    key = {"*.*"}
+         )})
+         public void listen(String msg){
+            ......
+         }
+     }
+  2、发送者
+     @Autowired
+     private AmqpTemplate amqpTemplate;
+
+     amqpTemplate.convertAndSend(exchange,routingkey,msg);
+
+  3、持久化
+      无须任何设置
+
+  4、手动ack
+     application.properties：
+        spring.rabbitmq.listener.simple.acknowledge-mode=manual
+        spring.rabbitmq.listener.direct.acknowledge-mode=manual
+     接收者：
+        public void listenMsg(String msg, Channel channel, Message message) {
+            ... ...
+            channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+        }
+
+
+
+
+
+

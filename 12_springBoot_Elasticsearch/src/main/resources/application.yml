@@ -1,0 +1,4 @@
+spring:
+  data:
+    elasticsearch:
+      cluster-nodes: 192.168.32.135:9200

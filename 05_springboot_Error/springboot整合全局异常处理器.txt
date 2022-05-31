@@ -1,0 +1,68 @@
+--------------------------回顾-------------------------------
+一、springboot整合mybatis
+    application.properties：
+        1、数据源
+            spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+            spring.datasource.url=jdbc:mysql://localhost:3306/springboot
+            spring.datasource.username=root
+            spring.datasource.password=1111
+            spring.datasource.type=com.alibaba.druid.pool.DruidDataSource
+        2、别名
+            mybatis.type-aliases-package=com.qf.pojo
+
+    App：
+        @SpringBootApplication
+        @MapperScan("com.qf.mapper")
+        public class App{
+            ... ...
+        }
+
+二、springboot整合junit
+    @RunWith(SpringJUnit4ClassRunner.class)
+    //@ContextConfiguration({"classpath:applicaitonContext.xml"})
+    @SpringBootTest(classes = {App.class})
+    public class UserServiceTest {
+
+    }
+
+三、springboot整合thymeleaf
+    注意：1、thymeleaf存放在resource/templates   2、后缀是.html
+
+    1、变量输出
+        th:value="${msg}"
+    2、内置对象
+        strings:
+            ${#strings.length(msg)}
+            ${#strings.substring(msg,6,8)}
+        dates：
+            ${#dates.format(msg,'yyyy-MM-dd')}
+        numbers：
+            ${#numbers.formatDecimal(msg,0,2)}
+    3、if for
+        <tr th:each="user :${list}">
+            <td th:text="${user.nam}"></td>
+            <td th:if="${user.sex}=='1'">女</td>
+            <td th:if="${user.sex}=='0'">男</td>
+            <td th:text="${user.sex}=='0'?'男':'女'"></td>
+        </tr>
+    4、url
+        ？传参：
+            <a th:href="@{/param(id=1,nam=zs)}">问号</a>
+        restful传参：
+            <a th:href="@{/param/{id}/{nam}(id=1,nam=zs)}">问号</a>
+    5、取作用域的属性值
+        request：${reqMsg}
+        session：${session.sesMsg}
+
+-----------------------springboot整合全局异常处理器---------------------------
+一、自定义错误页面
+    1、页面名称：error.html
+    2、获取异常信息：${error}
+二、springboot整合全局异常处理器
+    1、异常处理的原则：
+        往上throws：dao--->service---->controller--->DispatchServlet---->从容器中取出HandlerExceptionResolve调用resolveException()处理异常
+    2、自定义全局异常处理器
+        @Componet
+        public class GlobalExceptionResolve implements HandlerExceptionResolve{
+            .......
+        }

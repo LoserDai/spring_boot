@@ -1,0 +1,29 @@
+-----------------springboot整合quartz-------------
+一、quartz使用思路
+	job：做什么事
+	trigger：什么时候做
+	scheduled：什么时做什么事
+二、springboot整合quartz
+    1、创建任务类
+        @Component
+        public class JobDemo{......}
+    2、整合quartz
+
+        @Configuration
+        public class QuartzConfig {
+            @Bean
+            public MethodInvokingJobDetailFactoryBean methodInvokingJobDetailFactoryBean(JobDemo jobDemo){
+                ... ...
+            }
+
+            @Bean
+            public CronTriggerFactoryBean cronTriggerFactoryBean(MethodInvokingJobDetailFactoryBean jobDetail){
+                ... ...
+            }
+
+            @Bean
+            public SchedulerFactoryBean schedulerFactoryBean(CronTriggerFactoryBean trigger){
+                ... ...
+            }
+
+        }

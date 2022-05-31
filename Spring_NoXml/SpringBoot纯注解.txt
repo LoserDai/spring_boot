@@ -1,0 +1,12 @@
+=================SpringBoot注解=====================
+1. @Configuration
+作用: 用于指定当前类是一个spring配置类, 相当于spring配置中的<beans>
+2.@ComponentScan("com.df")
+作用: //相当于 <context:component-scan base-package="com.df" />
+3. @Bean
+作用: 该注解用于方法上,表明使用此方法创建一个对象，并且放入spring容器。作用和在spring的xml配置文件中的：<bean/>是一样的
+4. @PropertySource
+作用: 该注解用于加载.properties文件中的配置,作用和在spring的xml配置文件中的：`<context:property-placeholder location="">`是一样的。
+5.@Import
+作用: 用来导入配置类或者一些需要前置加载的类。作用和在spring的xml配置文件中的：`<import resource=""></import>`是一样.
+注意: Import里面放的是一个数组,例: @Import({SpringConfiguration.class})

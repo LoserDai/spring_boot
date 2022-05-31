@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/01_springboot_helloworld" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/Spring_NoXml/pom.xml" />
+        <option value="$PROJECT_DIR$/01_springboot_helloworld/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot_ConfigurationProperties/pom.xml" />
+        <option value="$PROJECT_DIR$/02_springboot_Configuration/pom.xml" />
+        <option value="$PROJECT_DIR$/03_springboot_mybatis/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot_thymeleaf/pom.xml" />
+        <option value="$PROJECT_DIR$/04_springboot_Error/pom.xml" />
+        <option value="$PROJECT_DIR$/springboot_devtools/pom.xml" />
+        <option value="$PROJECT_DIR$/06_springboot_devtools/pom.xml" />
+        <option value="$PROJECT_DIR$/07_spring_mul_env/pom.xml" />
+        <option value="$PROJECT_DIR$/08_spring_logback/pom.xml" />
+        <option value="$PROJECT_DIR$/09_springboot_quartz/pom.xml" />
+        <option value="$PROJECT_DIR$/10_springboot_rabbitMQ/pom.xml" />
+        <option value="$PROJECT_DIR$/04_springboot_thymeleaf/pom.xml" />
+        <option value="$PROJECT_DIR$/05_springboot_Error/pom.xml" />
+        <option value="$PROJECT_DIR$/11_Spring Data Redis/pom.xml" />
+        <option value="$PROJECT_DIR$/12_springBoot_Elasticsearch/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

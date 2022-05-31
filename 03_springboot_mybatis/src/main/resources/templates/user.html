@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/user/editUser" method="post">
+    Id:   <input type="text" name="id" th:value="${User.id}" readonly><br>
+    姓名: <input type="text" name="nam" th:value="${User.nam}"><br>
+    密码: <input type="text" name="pwd" th:value="${User.pwd}" ><br>
+    性别: <input type="text" name="sex" th:value="${User.sex}" ><br>
+    birth:<input type="text" name="birth" th:value="${#dates.format(User.birth,'yyyy:MM:dd:HH:ss')}" ><br>
+    <button>保存</button>
+</form>
+</body>
+</html>

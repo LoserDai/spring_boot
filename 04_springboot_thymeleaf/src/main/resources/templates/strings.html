@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<span th:text="${#strings.substring(msg,4,7)}"></span>
+<br>
+<span th:text="${#strings.length(msg)}"></span>
+<br>
+<span th:text="${#strings.toLowerCase(msg)}"></span>
+</body>
+</html>

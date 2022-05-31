@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/user/addUser}" method="post">
+    姓名：<input type="text" name="nam"/><br/>
+    密码：<input type="text" name="pwd"/><br/>
+    性别：<input type="radio" name="sex" value="1"/>女
+    <input type="radio" name="sex" value="0"/>男<br/>
+    生日：<input type="text" name="birth" placeholder="请按2021/11/09这个格式填写!"/><br/>
+    <input type="submit" value="保存提交"/><br/>
+</form>
+</body>
+</html>

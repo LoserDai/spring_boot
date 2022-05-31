@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        table {border-collapse: collapse; font-size: 14px; width: 80%; margin: auto}
+        table, th, td {border: 1px solid darkslategray;padding: 10px}
+    </style>
+</head>
+<body>
+<div style="text-align: center">
+    <span style="color: darkslategray; font-size: 30px">欢迎光临！</span>
+    <hr/>
+    尊敬的: <span th:text="${session.user.nam}"></span>,欢迎您~
+    <br>
+    <a th:href="@{/user/add}">添加用户</a>
+    <table class="list">
+        <tr>
+            <th>id</th>
+            <th>姓名</th>
+            <th>密码</th>
+            <th>性别</th>
+            <th>生日</th>
+            <th>操作</th>
+        </tr>
+        <tr th:each="user : ${list}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.nam}"></td>
+            <td th:text="${user.pwd}"></td>
+            <td th:text="${user.sex==1}?'男':'女'"></td>
+            <td th:text="${#dates.format(user.birth,'yyyy:MM:dd:HH:ss')}"></td>
+            <td><a th:href="@{/user/delUser/(id=${user.id})}">删除</a> |
+                <a th:href="@{/user/findUserIById/(id=${user.id})}">修改</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

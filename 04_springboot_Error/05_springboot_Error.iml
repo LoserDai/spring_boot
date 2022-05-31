@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../05_springboot_Error">
+      <sourceFolder url="file://$MODULE_DIR$/../05_springboot_Error/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../05_springboot_Error/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../05_springboot_Error/src/test" isTestSource="true" />
+    </content>
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-web:5.1.8.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:5.1.8.RELEASE" level="project" />
+  </component>
+</module>
